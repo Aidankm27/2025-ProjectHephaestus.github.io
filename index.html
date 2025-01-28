@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -23,13 +24,30 @@
         p {
             font-size: 1.2rem;
         }
+        .image-container {
+            display: flex;
+            justify-content: center; /* Aligns the image to the right */
+            width: 100%; /* Ensures it spans the full width */
+            margin-top: 20px;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
     <div>
         <h1>Project Hephaestus</h1>
         <p>This site is currently under development.</p>
-        <p>Stay tuned for updates!</p>
+
+    </div>
+    <div>
+        <p>Who let you in here??</p>
+        <div class="image-container">
+            <img src="Evil20Eyed20Graham.png" alt="Cat Emote">
+        </div>
     </div>
 </body>
 </html>
