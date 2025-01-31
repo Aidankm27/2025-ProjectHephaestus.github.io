@@ -84,7 +84,7 @@
             formData.append("file", fileInput.files[0]);  // Use 'file' to match Flask's form field name
 
             // Send the file to the Flask upload endpoint
-            fetch("http://your-ubuntu-server-ip:5000/upload-endpoint", {  // Replace with your actual Ubuntu server IP
+            fetch("http://192.168.10.192:5000/upload-endpoint", {  // Replace with your actual Ubuntu server IP
                 method: "POST",
                 body: formData,
             })
