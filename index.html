@@ -37,7 +37,7 @@
             <h3>Upload a Picture</h3>
             <form id="uploadForm" enctype="multipart/form-data">
                 <label for="fileInput">Choose an image to upload:</label>
-                <input type="file" id="fileInput" name="fileInput" accept="image/*" />
+                <input type="file" id="fileInput" name="file" accept="image/*" />
                 <br />
                 <img id="preview" src="" alt="Image Preview" style="max-width: 300px; display: none;" />
                 <br />
@@ -81,10 +81,10 @@
 
             const formData = new FormData();
             const fileInput = document.getElementById("fileInput");
-            formData.append("file", fileInput.files[0]);
+            formData.append("file", fileInput.files[0]);  // Use 'file' to match Flask's form field name
 
-            // Example: Send the file to a server-side endpoint (e.g., PHP, Node.js)
-            fetch("/upload-endpoint", {  // Replace with your server-side upload endpoint
+            // Send the file to the Flask upload endpoint
+            fetch("/upload-endpoint", {  // Flask's server-side endpoint for handling the upload
                 method: "POST",
                 body: formData,
             })
