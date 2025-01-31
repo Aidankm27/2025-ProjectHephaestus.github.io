@@ -23,11 +23,6 @@
             text-align: center;
         }
 
-        .upload-container label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
         input, button { 
             width: 300px; 
             padding: 10px; 
@@ -52,13 +47,8 @@
 </head>
 <body>
     <div id="main-content">
-        <h1>Project Hephaestus</h1>
-        <p>This site is currently under development.</p>
-
         <div class="upload-container">
-            <h3>Upload a Picture</h3>
             <form id="uploadForm" enctype="multipart/form-data">
-                <label for="fileInput">Choose an image to upload:</label>
                 <input type="file" id="fileInput" name="file" accept="image/*" />
                 <br />
                 <img id="preview" src="" alt="Image Preview" />
