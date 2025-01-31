@@ -5,60 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Hephaestus</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px; 
-            background-color: #1a1a1a; 
-            color: #f0f0f0; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #login-container { 
-            display: block; 
-            background-color: #333; 
-            padding: 20px; 
-            border-radius: 10px; 
-            max-width: 300px; 
-            margin: auto; 
-        }
-
-        #main-content { 
-            display: none; 
-            text-align: center;
-        }
-
-        input, button { 
-            width: 100%; 
-            padding: 10px; 
-            margin: 5px 0; 
-            border-radius: 5px;
-        }
-
-        .upload-container { 
-            margin-top: 20px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .image-container { 
-            display: flex; 
-            justify-content: center; 
-            margin-top: 20px; 
-        }
-
-        img { 
-            width: 200px; 
-            height: 200px; 
-            object-fit: cover; 
-            display: none;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #1a1a1a; color: #f0f0f0; }
+        #login-container { display: block; background-color: #333; padding: 20px; border-radius: 10px; max-width: 300px; margin: auto; }
+        #main-content { display: none; }
+        .container { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, button { width: calc(100% - 20px); padding: 10px; margin: 5px 0; }
+        .image-container { display: flex; justify-content: center; margin-top: 20px; }
+        img { width: 200px; height: 200px; object-fit: cover; }
+        .upload-container { margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -80,10 +34,12 @@
 
         <!-- Image Upload Form -->
         <div class="upload-container">
+            <h3>Upload a Picture</h3>
             <form id="uploadForm" enctype="multipart/form-data">
+                <label for="fileInput">Choose an image to upload:</label>
                 <input type="file" id="fileInput" name="file" accept="image/*" />
                 <br />
-                <img id="preview" src="" alt="Image Preview" />
+                <img id="preview" src="" alt="Image Preview" style="max-width: 300px; display: none;" />
                 <br />
                 <button type="submit">Upload</button>
             </form>
@@ -117,6 +73,29 @@
                 };
                 reader.readAsDataURL(file);  // Convert the image to base64 and load
             }
+        });
+
+        // Handle the form submission (send file to server, etc.)
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent form from reloading page
+
+            const formData = new FormData();
+            const fileInput = document.getElementById("fileInput");
+            formData.append("file", fileInput.files[0]);  // Use 'file' to match Flask's form field name
+
+            // Send the file to the Flask upload endpoint
+            fetch("/upload-endpoint", {  // Flask's server-side endpoint for handling the upload
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("File uploaded successfully:", data);
+                // Optionally, update the page with the uploaded image or a success message
+            })
+            .catch(error => {
+                console.error("Error uploading file:", error);
+            });
         });
     </script>
     
