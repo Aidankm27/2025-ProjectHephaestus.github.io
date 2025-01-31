@@ -5,49 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Hephaestus</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-            text-align: center;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        p {
-            font-size: 1.2rem;
-        }
-        .image-container {
-            display: flex;
-            justify-content: center; /* Aligns the image to the right */
-            width: 100%; /* Ensures it spans the full width */
-            margin-top: 20px;
-        }
-        img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #1a1a1a; color: #f0f0f0; }
+        #login-container { display: block; background-color: #333; padding: 20px; border-radius: 10px; max-width: 300px; margin: auto; }
+        #main-content { display: none; }
+        .container { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, button { width: calc(100% - 20px); padding: 10px; margin: 5px 0; }
+        .image-container { display: flex; justify-content: center; margin-top: 20px; }
+        img { width: 200px; height: 200px; object-fit: cover; }
+        .upload-container { margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div>
+    <div id="login-container" class="container">
+        <h2>Enter Access Password</h2>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="login()">Login</button>
+    </div>
+    
+    <div id="main-content">
         <h1>Project Hephaestus</h1>
         <p>This site is currently under development.</p>
+        <div>
+            <p>Who let you in here??</p>
+            <div class="image-container">
+                <img src="Evil20Eyed20Graham.png" alt="Cat Emote">
+            </div>
+        </div>
 
-    </div>
-    <div>
-        <p>Who let you in here??</p>
-        <div class="image-container">
-            <img src="Evil20Eyed20Graham.png" alt="Cat Emote">
+        <!-- Image Upload Form -->
+        <div class="upload-container">
+            <h3>Upload a Picture</h3>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <label for="fileInput">Choose an image to upload:</label>
+                <input type="file" id="fileInput" name="fileInput" accept="image/*" />
+                <br />
+                <img id="preview" src="" alt="Image Preview" style="max-width: 300px; display: none;" />
+                <br />
+                <button type="submit">Upload</button>
+            </form>
         </div>
     </div>
+
+    <script>
+        // Default password (obfuscated using base64)
+        const sitePassword = atob("aGVwaGFlc3R1czIwMjU="); // base64 of "hephaestus2025"
+    
+        function login() {
+            const inputPassword = document.getElementById("password").value;
+            if (inputPassword === sitePassword) {
+                // Hide login, show main content
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                alert("Incorrect password!");
+            }
+        }
+
+        // JavaScript for Image Preview
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+            const file = event.target.files[0];  // Get the selected file
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById("preview");
+                    preview.src = e.target.result;  // Set image preview source
+                    preview.style.display = "block";  // Show the preview image
+                };
+                reader.readAsDataURL(file);  // Convert the image to base64 and load
+            }
+        });
+
+        // Handle the form submission (send file to server, etc.)
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent form from reloading page
+
+            const formData = new FormData();
+            const fileInput = document.getElementById("fileInput");
+            formData.append("file", fileInput.files[0]);
+
+            // Example: Send the file to a server-side endpoint (e.g., PHP, Node.js)
+            fetch("/upload-endpoint", {  // Replace with your server-side upload endpoint
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("File uploaded successfully:", data);
+                // Optionally, update the page with the uploaded image or a success message
+            })
+            .catch(error => {
+                console.error("Error uploading file:", error);
+            });
+        });
+    </script>
+    
 </body>
 </html>
