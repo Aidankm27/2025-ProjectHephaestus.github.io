@@ -12,7 +12,7 @@
         input, button { width: calc(100% - 20px); padding: 10px; margin: 5px 0; }
         .image-container { display: flex; justify-content: center; margin-top: 20px; }
         img { width: 200px; height: 200px; object-fit: cover; }
-        .upload-container { margin-top: 20px; }
+        .upload-container { margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -32,19 +32,16 @@
             </div>
         </div>
 
-        <!-- Image Upload Form -->
+            <!-- Image Upload Form -->
         <div class="upload-container">
-            <h3>Upload a Picture</h3>
-            <form id="uploadForm" enctype="multipart/form-data">
-                <label for="fileInput">Choose an image to upload:</label>
-                <input type="file" id="fileInput" name="file" accept="image/*" />
+            <form id="uploadForm" enctype="multipart/form-data" style="max-width: 250px; margin: 0 auto;">
+                <input type="file" id="fileInput" name="file" accept="image/*" style="width: 100%; padding: 8px; margin: 5px 0;" />
                 <br />
-                <img id="preview" src="" alt="Image Preview" style="max-width: 300px; display: none;" />
+                <img id="preview" src="" alt="Image Preview" style="max-width: 150px; display: none; margin: 10px 0;" />
                 <br />
-                <button type="submit">Upload</button>
+                <button type="submit" style="padding: 8px 12px; font-size: 14px;">Upload</button>
             </form>
         </div>
-    </div>
 
     <script>
         // Default password (obfuscated using base64)
