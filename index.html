@@ -28,7 +28,7 @@
         <div>
             <p>Who let you in here??</p>
             <div class="image-container">
-                <img src="Evil20Eyed20Graham.png" alt="Cat Emote">
+                <img src="/graham.png" alt="Cat Emote">
             </div>
         </div>
 
@@ -44,8 +44,8 @@
         </div>
 
     <script>
-        // Default password (obfuscated using base64)
-        const sitePassword = atob("aGVwaGFlc3R1czIwMjU="); // base64 of "hephaestus2025"
+        // Default password
+        const sitePassword = atob("cGFzc3dvcmQ=");
     
         function login() {
             const inputPassword = document.getElementById("password").value;
@@ -78,10 +78,10 @@
 
             const formData = new FormData();
             const fileInput = document.getElementById("fileInput");
-            formData.append("file", fileInput.files[0]);  // Use 'file' to match Flask's form field name
+            formData.append("file", fileInput.files[0]);  // Flask and PHP have the same form format
 
-            // Send the file to the Flask upload endpoint
-            fetch("/upload-endpoint", {  // Flask's server-side endpoint for handling the upload
+            // Send the file to PHP file
+            fetch("upload.php", { //could be wrong, try upload.php
                 method: "POST",
                 body: formData,
             })
