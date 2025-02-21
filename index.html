@@ -5,23 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Hephaestus</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #1a1a1a; color: #f0f0f0; }
-        #login-container { display: block; background-color: #333; padding: 20px; border-radius: 10px; max-width: 300px; margin: auto; }
-        #main-content { display: none; }
-        .container { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
-        input, button { width: calc(100% - 20px); padding: 10px; margin: 5px 0; }
-        .image-container { display: flex; justify-content: center; margin-top: 20px; }
-        img { width: 200px; height: 200px; object-fit: cover; }
-        .upload-container { margin-top: 30px; }
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0; /* Light background */
+            color: #333;
+        }
+
+        /* Login container */
+        #login-container {
+            background: #fff; /* White background for the form */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Input styling */
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #333; /* Border turns dark on focus */
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #333;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        /* Main content styling */
+        #main-content {
+            display: none;
+            text-align: center;
+            color: #333;
+            opacity: 0; /* Start with hidden content */
+            transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
+        }
+
+        .image-container {
+            width: 250px; /* Bigger circle for top image */
+            height: 250px;
+            margin: 20px auto;
+            background-color: #f0f0f0; /* Light background for the preview box */
+            border: 2px solid #ddd;
+            border-radius: 50%; /* Circle shape */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure image covers the circle */
+        }
+
+        /* Image preview box (square) */
+        .preview-container {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            background-color: #f0f0f0; /* Light background for the preview box */
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensure image fits inside the box */
+        }
+
+        /* Image upload styles */
+        .upload-container {
+            margin-top: 30px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            #login-container {
+                padding: 20px;
+                max-width: 300px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="login-container" class="container">
+
+    <!-- Login form -->
+    <div id="login-container">
         <h2>Enter Access Password</h2>
-        <input type="password" id="password" placeholder="Enter Password">
-        <button onclick="login()">Login</button>
+        <form onsubmit="login(); return false;">
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
     </div>
-    
+
+    <!-- Main content after successful login -->
     <div id="main-content">
         <h1>Project Hephaestus</h1>
         <p>This site is currently under development.</p>
@@ -32,69 +178,63 @@
             </div>
         </div>
 
-            <!-- Image Upload Form -->
+        <!-- Image Upload Form -->
         <div class="upload-container">
-            <form id="uploadForm" enctype="multipart/form-data" style="max-width: 250px; margin: 0 auto;">
-                <input type="file" id="fileInput" name="file" accept="image/*" style="width: 100%; padding: 8px; margin: 5px 0;" />
-                <br />
-                <img id="preview" src="" alt="Image Preview" style="max-width: 150px; display: none; margin: 10px 0;" />
-                <br />
-                <button type="submit" style="padding: 8px 12px; font-size: 14px;">Upload</button>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" id="fileInput" name="file" accept="image/*">
+                <!-- Image preview box (square) -->
+                <div class="preview-container">
+                    <img id="preview" src="" alt="Image Preview" style="display: none;">
+                </div>
+                <br>
+                <button type="submit">Upload</button>
             </form>
         </div>
+    </div>
 
     <script>
-        // Default password
+        // Default password (base64 encoded 'password')
         const sitePassword = atob("cGFzc3dvcmQ=");
-    
+
         function login() {
             const inputPassword = document.getElementById("password").value;
             if (inputPassword === sitePassword) {
-                // Hide login, show main content
                 document.getElementById("login-container").style.display = "none";
-                document.getElementById("main-content").style.display = "block";
+                const mainContent = document.getElementById("main-content");
+                mainContent.style.display = "block";
+                setTimeout(function() {
+                    mainContent.style.opacity = 1; // Trigger fade-in effect
+                }, 10); // Delay the opacity change for the transition
             } else {
                 alert("Incorrect password!");
             }
         }
 
-        // JavaScript for Image Preview
+        // Image preview functionality
         document.getElementById("fileInput").addEventListener("change", function(event) {
-            const file = event.target.files[0];  // Get the selected file
+            const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const preview = document.getElementById("preview");
-                    preview.src = e.target.result;  // Set image preview source
-                    preview.style.display = "block";  // Show the preview image
+                    preview.src = e.target.result;
+                    preview.style.display = "block";  // Show the image
                 };
-                reader.readAsDataURL(file);  // Convert the image to base64 and load
+                reader.readAsDataURL(file);
             }
         });
 
-        // Handle the form submission (send file to server, etc.)
+        // Handle file upload (optional)
         document.getElementById("uploadForm").addEventListener("submit", function(event) {
-            event.preventDefault();  // Prevent form from reloading page
-
+            event.preventDefault();
             const formData = new FormData();
-            const fileInput = document.getElementById("fileInput");
-            formData.append("file", fileInput.files[0]);  // Flask and PHP have the same form format
-
-            // Send the file to PHP file
-            fetch("upload.php", { //could be wrong, try upload.php
+            formData.append("file", document.getElementById("fileInput").files[0]);
+            fetch("upload.php", {
                 method: "POST",
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("File uploaded successfully:", data);
-                // Optionally, update the page with the uploaded image or a success message
-            })
-            .catch(error => {
-                console.error("Error uploading file:", error);
-            });
+                body: formData
+            }).then(response => response.json()).then(data => console.log("File uploaded:", data));
         });
     </script>
-    
+
 </body>
 </html>
