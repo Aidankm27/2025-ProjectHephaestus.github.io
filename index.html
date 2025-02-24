@@ -6,6 +6,18 @@
     <title>Project Hephaestus</title>
     <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Add the CSS for spinning animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spin-animation {
+            animation: spin 5s linear infinite;
+        }
+    </style>
 </head>
 <body>
 
@@ -25,7 +37,7 @@
         <div>
             <p>Who let you in here??</p>
             <div class="image-container">
-                <img src="/graham.png" alt="Cat Emote">
+                <img id="image" src="/graham.png" alt="Cat Emote">
             </div>
         </div>
 
@@ -40,12 +52,6 @@
                 <br>
                 <button type="submit">Upload</button>
             </form>
-        </div>
-
-        <!-- Display the uploaded image (brandon.png) -->
-        <div id="uploaded-image-container" style="display:none;">
-            <h2>Uploaded Image</h2>
-            <img id="uploaded-image" src="brandon.png" alt="Uploaded Image" style="max-width: 100%; height: auto;">
         </div>
     </div>
 
@@ -109,9 +115,16 @@
                 if (data.status === 'success') {
                     alert("File uploaded successfully!");
 
-                    // Show the uploaded image (brandon.png)
-                    const uploadedImageContainer = document.getElementById("uploaded-image-container");
-                    uploadedImageContainer.style.display = "block";  // Show the uploaded image section
+                    // Change image to brandon.png and apply the spin animation
+                    const imageElement = document.getElementById("image");
+                    imageElement.src = "/brandon.png";  // Change to brandon.png
+                    imageElement.classList.add("spin-animation");  // Apply spinning animation
+
+                    // After 5 seconds, revert back to graham.png and stop spinning
+                    setTimeout(function() {
+                        imageElement.src = "/graham.png";  // Revert to graham.png
+                        imageElement.classList.remove("spin-animation");  // Remove spin animation
+                    }, 5000);  // 5 seconds delay
                 } else {
                     alert(data.message);
                 }
