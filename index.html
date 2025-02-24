@@ -4,157 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Hephaestus</title>
-    <style>
-        /* Global styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0; /* Light background */
-            color: #333;
-        }
-
-        /* Login container */
-        #login-container {
-            background: #fff; /* White background for the form */
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            animation: fadeIn 1s ease-out;
-        }
-
-        h2 {
-            margin-bottom: 30px;
-            font-size: 28px;
-            color: #333;
-            font-weight: 600;
-        }
-
-        /* Input styling */
-        input[type="password"] {
-            width: 100%;
-            padding: 15px;
-            margin: 15px 0;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 18px;
-            background-color: #f9f9f9;
-            color: #333;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #333; /* Border turns dark on focus */
-        }
-
-        /* Button styling */
-        button {
-            width: 100%;
-            padding: 15px;
-            margin-top: 20px;
-            background-color: #333;
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #555;
-        }
-
-        button:focus {
-            outline: none;
-        }
-
-        /* Main content styling */
-        #main-content {
-            display: none;
-            text-align: center;
-            color: #333;
-            opacity: 0; /* Start with hidden content */
-            transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
-        }
-
-        .image-container {
-            width: 250px; /* Bigger circle for top image */
-            height: 250px;
-            margin: 20px auto;
-            background-color: #f0f0f0; /* Light background for the preview box */
-            border: 2px solid #ddd;
-            border-radius: 50%; /* Circle shape */
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensure image covers the circle */
-        }
-
-        /* Image preview box (square) */
-        .preview-container {
-            width: 150px;
-            height: 150px;
-            margin: 20px auto;
-            background-color: #f0f0f0; /* Light background for the preview box */
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .preview-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Ensure image fits inside the box */
-        }
-
-        /* Image upload styles */
-        .upload-container {
-            margin-top: 30px;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            #login-container {
-                padding: 20px;
-                max-width: 300px;
-            }
-        }
-    </style>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -190,6 +41,12 @@
                 <button type="submit">Upload</button>
             </form>
         </div>
+
+        <!-- Display the uploaded image (brandon.png) -->
+        <div id="uploaded-image-container" style="display:none;">
+            <h2>Uploaded Image</h2>
+            <img id="uploaded-image" src="brandon.png" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+        </div>
     </div>
 
     <script>
@@ -224,15 +81,45 @@
             }
         });
 
-        // Handle file upload (optional)
+        // Handle file upload via AJAX (using fetch)
         document.getElementById("uploadForm").addEventListener("submit", function(event) {
             event.preventDefault();
+
+            // Get the selected file
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+
+            // Check if a file is selected
+            if (!file) {
+                alert("Please select a file to upload.");
+                return;
+            }
+
+            // Create FormData object to send the file
             const formData = new FormData();
-            formData.append("file", document.getElementById("fileInput").files[0]);
+            formData.append("file", file);
+
+            // Send the file to the server using fetch
             fetch("upload.php", {
                 method: "POST",
                 body: formData
-            }).then(response => response.json()).then(data => console.log("File uploaded:", data));
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert("File uploaded successfully!");
+
+                    // Show the uploaded image (brandon.png)
+                    const uploadedImageContainer = document.getElementById("uploaded-image-container");
+                    uploadedImageContainer.style.display = "block";  // Show the uploaded image section
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error uploading the file:", error);
+                alert("An error occurred while uploading the file.");
+            });
         });
     </script>
 
