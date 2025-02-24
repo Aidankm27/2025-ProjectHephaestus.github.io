@@ -1,36 +1,21 @@
 <?php
-// Tell the browser that we are returning JSON
-header('Content-Type: application/json');
+// Check if the form has been submitted and a file is uploaded
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
+    // Set the upload directory and file path
+    $uploadDirectory = 'uploads/';
+    $filePath = $uploadDirectory . basename($_FILES['file']['name']);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Define the upload directory (make sure this directory exists and is writable)
-    $uploadDirectory = '/var/www/html/uploads/';
-
-    // The 'file' index here corresponds to the name attribute in your HTML form's file input.
-    $filename = basename($_FILES['file']['name']);
-    $targetFile = $uploadDirectory . $filename;
-
-    // Check for errors during upload
-    if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-        http_response_code(400);
-        echo json_encode(array("error" => "Error during file upload."));
-        exit;
-    }
-
-    // Move the uploaded file from its temporary location to the uploads directory
-    if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
-        echo json_encode(array(
-            "success" => true,
-            "message" => "File uploaded successfully.",
-            "filename" => $filename
-        ));
+    // Check if the file is an image
+    if (getimagesize($_FILES['file']['tmp_name'])) {
+        // Try to move the uploaded file to the desired location
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
+            echo json_encode(['status' => 'success', 'message' => 'File uploaded successfully.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Sorry, there was an error uploading your file.']);
+        }
     } else {
-        http_response_code(500);
-        echo json_encode(array("error" => "Failed to move the uploaded file."));
+        echo json_encode(['status' => 'error', 'message' => 'Please upload a valid image file.']);
     }
 } else {
-    // If the request method is not POST, return an error
-    http_response_code(405);
-    echo json_encode(array("error" => "Method not allowed."));
+    echo json_encode(['status' => 'error', 'message' => 'No file uploaded.']);
 }
-?>
