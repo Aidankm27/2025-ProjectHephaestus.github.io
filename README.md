@@ -2,7 +2,15 @@
 
 Crowd-Controlled Picture Frame Project
 
-Group:
+# Group:
 * Mikaela Knutson
 * Joey Bueckert
 * Aidan maude
+
+# Supplies
+* E-Ink Display Board
+* Raspberry Pi
+* Battery
+* Frame
+
+
