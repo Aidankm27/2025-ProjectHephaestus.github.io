@@ -1,0 +1,16 @@
+Waveshare Display ($135.86):
+Amazon link: https://www.amazon.ca/waveshare-5-65inch-Display-7-Color-Raspberry/dp/B0BRBJ1RB8/?tag=googleshopc0c-20&linkCode=df0&hvadid=706738331967&hvpos=&hvnetw=g&hvrand=2839514900708530613&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9001611&hvtargid=pla-1965407817546&mcid=69ae76afb1f033e1a0af4468fdd3777f&gad_source=1&th=1
+
+Battery ($16.99):
+Amazon link: https://www.amazon.ca/FITHOOD-Rechargeable-Connector-Household-Appliances/dp/B0BHSS3QWY/?tag=googleshopc0c-20&linkCode=df0&hvadid=706724917116&hvpos=&hvnetw=g&hvrand=12266159201778567196&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9001611&hvtargid=pla-2301766993671&psc=1&mcid=2a534f1445eb3f4fab3d66f8c79e3495&gad_source=1
+
+Raspberry Pi Zero W ($26.65):
+PiShop link: https://www.amazon.ca/FITHOOD-Rechargeable-Connector-Household-Appliances/dp/B0BHSS3QWY/?tag=googleshopc0c-20&linkCode=df0&hvadid=706724917116&hvpos=&hvnetw=g&hvrand=12266159201778567196&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9001611&hvtargid=pla-2301766993671&psc=1&mcid=2a534f1445eb3f4fab3d66f8c79e3495&gad_source=1
+
+Raspberry Pi Header Connector ($1.25):
+PiShop link: https://www.pishop.ca/product/break-away-0-1-2x20-pin-strip-dual-male-header/
+
+Battery Module ($27.95):
+PiShop link: https://www.pishop.ca/product/powerboost-1000-charger-rechargeable-5v-lipo-usb-boost-1a-1000c/
+
+Total projected cost with 12% flat tax: $233.74
