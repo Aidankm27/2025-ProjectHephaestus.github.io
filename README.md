@@ -7,6 +7,8 @@ This is a network-connected digital photo frame that allows people to remotely u
 We decided to use an E-ink display for this project to avoid issues commonly seen in classic LED based digital displays. This allows for efficient power management and a unique aesthetic touch using floyd-steinberg dithering. 
 We chose to utilize rocky linux as our server OS because its dedicated purpose doesnt require extra applications commonly installed on other linux distributions, allowing granular control over the specific modules needed for this project without sacrificing overhead resources.
 The Raspberry Pi is a lighweight computer interface that allows us to handle the communication between the display and the file server.
+
+
 ![image](https://github.com/user-attachments/assets/167b96ef-71ba-4850-adc7-b4d46564c4d7)
 
 
