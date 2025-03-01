@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/f1696c29-f20a-486d-b096-9a8ea2a48f5a)![image](https://github.com/user-attachments/assets/7b900f63-088c-4f96-800a-2df8ed44223c)# Project Hephaestus
+# Project Hephaestus
 A Crowd-Controlled E-Ink Picture Frame
 
 
