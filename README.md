@@ -41,6 +41,7 @@ Additionally, we’ve identified a concern regarding the power requirements of t
 We’ve successfully uploaded and displayed our first custom images on the E-Ink screen. Furthermore, we have tested our local Wi-Fi connection to the webpage and confirmed that the image upload functionality to the file server is working as expected.
 
 *Poster Draft*
+
 ![image](https://github.com/user-attachments/assets/ac934078-3705-46fb-83bc-ad200e5a6803)
 
 
