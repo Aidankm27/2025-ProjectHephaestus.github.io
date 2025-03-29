@@ -40,12 +40,15 @@ Additionally, we’ve identified a concern regarding the power requirements of t
 *Achievements:*
 We’ve successfully uploaded and displayed our first custom images on the E-Ink screen. Furthermore, we have tested our local Wi-Fi connection to the webpage and confirmed that the image upload functionality to the file server is working as expected.
 
+![image](https://github.com/user-attachments/assets/a263554f-1ee1-4cb1-9036-e60bd59d89d5)
+
+
 *Poster Draft*
 
 ![image](https://github.com/user-attachments/assets/ac934078-3705-46fb-83bc-ad200e5a6803)
 
 
-![image](https://github.com/user-attachments/assets/a263554f-1ee1-4cb1-9036-e60bd59d89d5)
+
 
 # What's Next  
 In the next two weeks, we will focus on refining the user experience, particularly by developing an admin interface that will allow us to manage and assign images to the frame. This will also enable us to exercise some control over what is displayed, which is essential for our preparation ahead of the project fair.
