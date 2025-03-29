@@ -1,4 +1,4 @@
-# Project Hephaestus
+![image](https://github.com/user-attachments/assets/d5525548-fe29-4b80-aaee-e8538c938355)# Project Hephaestus
 A Crowd-Controlled E-Ink Picture Frame
 
 
@@ -39,6 +39,10 @@ Additionally, we’ve identified a concern regarding the power requirements of t
 
 *Achievements:*
 We’ve successfully uploaded and displayed our first custom images on the E-Ink screen. Furthermore, we have tested our local Wi-Fi connection to the webpage and confirmed that the image upload functionality to the file server is working as expected.
+
+*Poster Draft*
+![image](https://github.com/user-attachments/assets/ac934078-3705-46fb-83bc-ad200e5a6803)
+
 
 ![image](https://github.com/user-attachments/assets/a263554f-1ee1-4cb1-9036-e60bd59d89d5)
 
