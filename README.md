@@ -52,3 +52,11 @@ We’ve successfully uploaded and displayed our first custom images on the E-Ink
 
 # What's Next  
 In the next two weeks, we will focus on refining the user experience, particularly by developing an admin interface that will allow us to manage and assign images to the frame. This will also enable us to exercise some control over what is displayed, which is essential for our preparation ahead of the project fair.
+
+# Project Update (April 5, 2025)
+Over the past week, we encountered a major setback when our original Raspberry Pi suddenly failed. Fortunately, we were able to acquire a replacement unit of the same model and successfully transferred the memory card, salvaging our existing scripts and image files. However, during this recovery process, a second issue arose.
+Our E-Ink display, still attached to the old Raspberry Pi, was accidentally damaged when the display connector was forcibly detached. This required us to order a replacement display board, which thankfully arrived in time for further troubleshooting.
+
+Due to the nearly week-long delay caused by hardware replacement, we've made the decision to scale back our initial plan for a dedicated HTML-based admin interface. Instead, for the purpose of the project fair, we will mount the SMB file share (which stores the uploaded images from the web server) directly onto a laptop. This will allow us to manually vet and select appropriate images before pushing them to the E-Ink frame.
+
+With the core functionality now restored, our focus is shifting to final preparations for both the in-class and project fair presentations. This includes finishing our presentation slides and finalizing our project documentation.
