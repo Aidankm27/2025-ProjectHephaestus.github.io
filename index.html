@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Hephaestus</title>
-    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Add the CSS for spinning animation */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -20,6 +18,9 @@
     </style>
 </head>
 <body>
+    <header>
+        <img src="ITAS.png">
+    </header>
 
     <!-- Login form -->
     <div id="login-container">
@@ -32,20 +33,19 @@
 
     <!-- Main content after successful login -->
     <div id="main-content">
-        <h1>Project Hephaestus</h1>
-        <p>This site is currently under development.</p>
-        <div>
-            <p>Who let you in here??</p>
-            <div class="image-container">
-                <img id="image" src="/graham.png" alt="Cat Emote">
-            </div>
+        <!-- ITAS Title -->
+
+        <div class="image-container">
+            <img id="image" src="/Eframe_new.png" alt="Cat Emote">
         </div>
+        <h2>Project E-Frame</h2>
+        <p>Upload an image to use on your frame below!</p>
+
 
         <!-- Image Upload Form -->
         <div class="upload-container">
             <form id="uploadForm" enctype="multipart/form-data">
                 <input type="file" id="fileInput" name="file" accept="image/*">
-                <!-- Image preview box (square) -->
                 <div class="preview-container">
                     <img id="preview" src="" alt="Image Preview" style="display: none;">
                 </div>
@@ -55,8 +55,13 @@
         </div>
     </div>
 
+    <!-- Footer -->
+     <footer>
+        <hr>
+        <p>Mikaela K. &nbsp; Joey B. &nbsp; Aidan M.</p>
+     </footer>
+
     <script>
-        // Default password (base64 encoded 'password')
         const sitePassword = atob("cGFzc3dvcmQ=");
 
         function login() {
@@ -64,16 +69,15 @@
             if (inputPassword === sitePassword) {
                 document.getElementById("login-container").style.display = "none";
                 const mainContent = document.getElementById("main-content");
-                mainContent.style.display = "block";
-                setTimeout(function() {
-                    mainContent.style.opacity = 1; // Trigger fade-in effect
-                }, 10); // Delay the opacity change for the transition
+                mainContent.style.display = "flex";
+                setTimeout(() => {
+                    mainContent.style.opacity = 1;
+                }, 10);
             } else {
                 alert("Incorrect password!");
             }
         }
 
-        // Image preview functionality
         document.getElementById("fileInput").addEventListener("change", function(event) {
             const file = event.target.files[0];
             if (file) {
@@ -81,31 +85,23 @@
                 reader.onload = function(e) {
                     const preview = document.getElementById("preview");
                     preview.src = e.target.result;
-                    preview.style.display = "block";  // Show the image
+                    preview.style.display = "block";
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        // Handle file upload via AJAX (using fetch)
         document.getElementById("uploadForm").addEventListener("submit", function(event) {
             event.preventDefault();
-
-            // Get the selected file
-            const fileInput = document.getElementById("fileInput");
-            const file = fileInput.files[0];
-
-            // Check if a file is selected
+            const file = document.getElementById("fileInput").files[0];
             if (!file) {
                 alert("Please select a file to upload.");
                 return;
             }
 
-            // Create FormData object to send the file
             const formData = new FormData();
             formData.append("file", file);
 
-            // Send the file to the server using fetch
             fetch("upload.php", {
                 method: "POST",
                 body: formData
@@ -114,17 +110,14 @@
             .then(data => {
                 if (data.status === 'success') {
                     alert("File uploaded successfully!");
-
-                    // Change image to brandon.png and apply the spin animation
                     const imageElement = document.getElementById("image");
-                    imageElement.src = "/brandon.png";  // Change to brandon.png
-                    imageElement.classList.add("spin-animation");  // Apply spinning animation
+                    imageElement.src = "/brandon.png";
+                    imageElement.classList.add("spin-animation");
 
-                    // After 5 seconds, revert back to graham.png and stop spinning
-                    setTimeout(function() {
-                        imageElement.src = "/graham.png";  // Revert to graham.png
-                        imageElement.classList.remove("spin-animation");  // Remove spin animation
-                    }, 5000);  // 5 seconds delay
+                    setTimeout(() => {
+                        imageElement.src = "/Eframe.png";
+                        imageElement.classList.remove("spin-animation");
+                    }, 5000);
                 } else {
                     alert(data.message);
                 }
