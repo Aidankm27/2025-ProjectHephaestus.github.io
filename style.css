@@ -6,18 +6,27 @@
     font-family: 'Arial', sans-serif;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0; /* Light background */
+header {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 16px;
+}
+
+header img {
+    max-height: 50px;
+}
+
+html, body {
+    height: 100vh; /* Use full height of the viewport */
+    background-color: #FBFAF7;
     color: #333;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Login container */
 #login-container {
-    background: #fff; /* White background for the form */
+    background: #fff;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -25,6 +34,7 @@ body {
     max-width: 400px;
     text-align: center;
     animation: fadeIn 1s ease-out;
+    margin: auto;
 }
 
 h2 {
@@ -49,15 +59,15 @@ input[type="password"] {
 
 input[type="password"]:focus {
     outline: none;
-    border-color: #333; /* Border turns dark on focus */
+    border-color: #333;
 }
 
 /* Button styling */
 button {
     width: 100%;
     padding: 15px;
-    margin-top: 20px;
-    background-color: #333;
+    margin-top: 0px;
+    background-color: #034965;
     border: none;
     border-radius: 10px;
     color: #fff;
@@ -75,43 +85,48 @@ button:focus {
     outline: none;
 }
 
-/* Main content styling */
+/* Main content */
 #main-content {
     display: none;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    padding: 10px 20px; /* Reduced padding */
     text-align: center;
-    color: #333;
-    opacity: 0; /* Start with hidden content */
-    transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
 }
 
+/* Image container */
 .image-container {
-    width: 250px; /* Bigger circle for top image */
+    width: 250px;
     height: 250px;
     margin: 20px auto;
-    background-color: #f0f0f0; /* Light background for the preview box */
-    border: 2px solid #ddd;
-    border-radius: 50%; /* Circle shape */
-    overflow: hidden;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Ensure the image inside the container scales correctly */
 .image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure image covers the circle */
+    display: block; /* Remove any unwanted spacing around the image */
 }
 
-/* Image preview box (square) */
+
+/* Image preview */
 .preview-container {
     width: 150px;
     height: 150px;
     margin: 20px auto;
-    background-color: #f0f0f0; /* Light background for the preview box */
+    background-color: #f0f0f0;
     border: 2px solid #ddd;
     border-radius: 10px;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,15 +135,24 @@ button:focus {
 .preview-container img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensure image fits inside the box */
+    object-fit: contain;
 }
 
-/* Image upload styles */
+/* Upload container centered */
 .upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: 30px;
 }
 
-/* Animations */
+#fileInput {
+    width: 35%;
+    color: transparent;
+}
+
+/* Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -146,4 +170,25 @@ button:focus {
         padding: 20px;
         max-width: 300px;
     }
+}
+
+
+/* Footer at bottom */
+footer {
+    text-align: center;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    color: #555;
+    background-color: #FBFAF7;
+}
+
+footer hr {
+    width: 80%;
+    margin: 5px auto 10px; /* Adjusted margin for spacing */
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+footer p {
+    margin-top: 10px; /* Adds space between the line and the names */
 }
